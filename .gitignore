@@ -17,3 +17,15 @@ build
 *.local
 *.pem
 *.log
+
+# runtime data
+iot/mosquitto/data/
+iot/mosquitto/log/
+
+# zigbee runtime
+iot/zigbee2mqtt/data/database.db
+iot/zigbee2mqtt/data/state.json
+iot/zigbee2mqtt/data/log/
+
+# optional backups
+iot/zigbee2mqtt/data/*.log

@@ -1,0 +1,33 @@
+homeassistant:
+  enabled: false
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://mosquitto:1883
+serial:
+  port: /dev/ttyUSB0
+  adapter: ember
+frontend:
+  enabled: true
+  port: 8080
+advanced:
+  network_key:
+    - 102
+    - 150
+    - 205
+    - 197
+    - 103
+    - 65
+    - 77
+    - 171
+    - 182
+    - 63
+    - 86
+    - 170
+    - 236
+    - 222
+    - 34
+    - 36
+version: 5
+devices:
+  '0x00124b002f895813':
+    friendly_name: plug_plant
