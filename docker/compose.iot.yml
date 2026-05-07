@@ -27,6 +27,25 @@ services:
       - "traefik.http.routers.zigbee.rule=Host(`zigbee.home`)"
       - "traefik.http.services.zigbee.loadbalancer.server.port=8080"
 
+  event-hub:
+    build:
+      context: ../../event-hub
+    restart: unless-stopped
+    depends_on:
+      - mosquitto
+    expose:
+      - "3000"
+    environment:
+      - MQTT_HOST=mosquitto
+      - MQTT_PORT=1883
+      - MQTT_CLIENT_ID=event-hub
+      - HTTP_ADDR=0.0.0.0:3000
+      - RUST_LOG=info
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.event-hub.rule=Host(`event-hub.home`)"
+      - "traefik.http.services.event-hub.loadbalancer.server.port=3000"
+
 networks:
   default:
     external: true
