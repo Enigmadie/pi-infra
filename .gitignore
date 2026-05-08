@@ -18,6 +18,11 @@ build
 *.pem
 *.log
 
+# env
+env/.core.env
+env/.iot.env
+env/.app.env
+
 # runtime data
 iot/mosquitto/data/
 iot/mosquitto/log/
