@@ -27,7 +27,7 @@ services:
       - "traefik.http.routers.zigbee.rule=Host(`zigbee.home`)"
       - "traefik.http.services.zigbee.loadbalancer.server.port=8080"
 
-  event-hub:
+  iot-hub:
     build:
       context: ../../iot-hub
     restart: unless-stopped
