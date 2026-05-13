@@ -40,7 +40,25 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.iot-hub.rule=Host(`iot-hub.home`)"
+      - "traefik.http.routers.iot-hub-api.rule=Host(`iot.home`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.iot-hub-api.priority=100"
+      - "traefik.http.routers.iot-hub-api.middlewares=iot-hub-strip-api"
+      - "traefik.http.middlewares.iot-hub-strip-api.stripprefix.prefixes=/api"
       - "traefik.http.services.iot-hub.loadbalancer.server.port=3000"
+
+  iot-dashboard:
+    build:
+      context: ../../iot-dashboard
+      args:
+        PUBLIC_IOT_API_BASE_URL: /api
+    restart: unless-stopped
+    expose:
+      - "80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.iot-dashboard.rule=Host(`iot.home`)"
+      - "traefik.http.routers.iot-dashboard.priority=1"
+      - "traefik.http.services.iot-dashboard.loadbalancer.server.port=80"
 
 networks:
   default:
